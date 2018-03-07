@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GettingWarmer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YNW-KT-pku">
+                                <rect key="frame" x="10" y="40.5" width="300" height="460"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dsQ-9z-0PW">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="170"/>
+                                    </mapView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PvZ-v6-Lyp">
+                                        <rect key="frame" x="0.0" y="170" width="300" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" constant="30" id="nQ6-F2-zIZ"/>
+                                        </constraints>
+                                        <state key="normal" title="Initiate Location"/>
+                                        <connections>
+                                            <action selector="initiateLocationButtonWithInitiateButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HDA-Ba-KIS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KoV-UF-H2T">
+                                        <rect key="frame" x="0.0" y="200" width="300" height="30"/>
+                                        <state key="normal" title="Set Geofence"/>
+                                        <connections>
+                                            <action selector="setGeofence:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bpC-p0-4z0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBx-35-OXZ">
+                                        <rect key="frame" x="0.0" y="230" width="300" height="30"/>
+                                        <state key="normal" title="Authorize Notifications"/>
+                                        <connections>
+                                            <action selector="authorizeNotificaitons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L3W-Xw-XJm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRQ-wN-Pm2">
+                                        <rect key="frame" x="0.0" y="260" width="300" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Sbj-Vu-vDp"/>
+                                        </constraints>
+                                        <state key="normal" title="Test Notification"/>
+                                        <connections>
+                                            <action selector="testNotification:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aSz-wi-1NM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8en-Hb-avl">
+                                        <rect key="frame" x="0.0" y="290" width="300" height="30"/>
+                                        <state key="normal" title="Initiate Homekit"/>
+                                        <connections>
+                                            <action selector="initiateHomeKit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dbo-ta-GkK"/>
+                                        </connections>
+                                    </button>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tL-dm-7ae">
+                                        <rect key="frame" x="0.0" y="320" width="300" height="140"/>
+                                    </pickerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="pBx-35-OXZ" firstAttribute="height" secondItem="KoV-UF-H2T" secondAttribute="height" id="1Xc-Z3-K2g"/>
+                                    <constraint firstItem="8en-Hb-avl" firstAttribute="height" secondItem="uRQ-wN-Pm2" secondAttribute="height" id="LgC-TH-zPr"/>
+                                    <constraint firstItem="KoV-UF-H2T" firstAttribute="height" secondItem="PvZ-v6-Lyp" secondAttribute="height" id="cPb-I5-y8i"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YNW-KT-pku" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" id="2bC-5g-Xut"/>
+                            <constraint firstItem="YNW-KT-pku" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NV1-VL-ds1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YNW-KT-pku" secondAttribute="trailing" constant="10" id="TBk-Qs-v9A"/>
+                            <constraint firstItem="YNW-KT-pku" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="a6n-qB-9jh"/>
+                            <constraint firstItem="YNW-KT-pku" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20.5" id="yJ4-gO-NPg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="distancePickerView" destination="4tL-dm-7ae" id="peJ-Dv-0tV"/>
+                        <outlet property="initiateLocationButton" destination="PvZ-v6-Lyp" id="7pW-iG-tn4"/>
+                        <outlet property="mapView" destination="dsQ-9z-0PW" id="SHQ-la-xeV"/>
+                        <outlet property="stackView" destination="YNW-KT-pku" id="HR8-Ew-mGV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>
