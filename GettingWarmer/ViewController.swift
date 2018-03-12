@@ -8,6 +8,11 @@
 
 import UIKit
 import MapKit
+import HomeController
+
+protocol GeofenceThresholdListener {
+    func enteredGeofence()
+}
 
 class ViewController: UIViewController {
     
@@ -21,7 +26,8 @@ class ViewController: UIViewController {
     let distancePicker = DistancePicker()
     let locationManager = LocationManager()
     let mapController = MapController()
-    
+    let homeController = HomeController()
+
     // actual data
     var location: CLLocation?
     var radius: CLLocationDistance = CLLocationDistance(100000)
@@ -85,7 +91,22 @@ extension ViewController {
     }
     
     @IBAction func initiateHomeKit(_ sender: Any) {
-        print("TODO implement homekit integration")
+        homeController.homekitSetup()
+        print("home \(homeController.home)")
+    }
+    
+    @IBAction func printTemperature(_ sender: Any) {
+        
+        guard let number = homeController.home.thermostats.first?.temperature() else {
+            print("No thermostat temperature available")
+            return
+        }
+        let alert = UIAlertController(title: "Current Temperature", message: "The current temperature is \(number)", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .cancel)
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+        
     }
     
     @IBAction func authorizeNotificaitons(_ sender: Any) {
@@ -93,7 +114,6 @@ extension ViewController {
     }
     
     @IBAction func testNotification(_ sender: Any) {
-        print("TODO implement a test notification")
         for region in locationManager.monitoredRegions{
             print("this is a region we are monitoring: \(region.identifier), \(region)")
         }

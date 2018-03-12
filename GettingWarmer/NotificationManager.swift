@@ -27,7 +27,10 @@ class NotificationManager: NSObject {
         
         let center = UNUserNotificationCenter.current()
         center.setNotificationCategories([category])
-        let request = UNNotificationRequest(identifier: "entered region notification", content: content, trigger: trigger)
+        let identifier = "\(body)NotificationID"
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content,
+                                            trigger: trigger)
         center.add(request) { (error) in
             if let error = error {
                 print("we got an error with a notification \(error)")

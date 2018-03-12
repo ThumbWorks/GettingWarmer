@@ -2,9 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Getting Warmer requres always on location so as to be notified of your location changes. Ok</string>
+	<key>NSHomeKitUsageDescription</key>
+	<string>Getting Warmer turns on your thermostat through HomeKit</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Getting Warmer shows your location on a map.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Getting Warmer requres always on location so as to be notified of your location changes.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

@@ -7,19 +7,31 @@
 //
 
 import MapKit
+import HomeController
 
 class LocationManager: CLLocationManager, CLLocationManagerDelegate {
     var authBlock: ((Bool, String?) -> ())?
     var locationUpdate: ((CLLocation) -> ())?
     
+    var radiusDistance: CLLocationDistance = CLLocationDistance(0)
+    
+    private func temperature() -> NSNumber {
+        let homeController = HomeController()
+        homeController.homekitSetup()
+        guard let temperature = homeController.home.thermostats.first?.temperature() else {
+            return 0
+        }
+        return temperature
+    }
+    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("entered a region")
-        NotificationManager().triggerNotification(seconds: TimeInterval(5), body: "Entered a region")
+        NotificationManager().triggerNotification(seconds: TimeInterval(5), body: "Entered a region \(temperature())")
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         print("did exit region")
-        NotificationManager().triggerNotification(seconds: TimeInterval(5), body: "Exited a region")
+        NotificationManager().triggerNotification(seconds: TimeInterval(5), body: "Exited a region \(temperature())")
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -16,6 +16,8 @@
 		5F7838E7204E6B340012219A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7838E6204E6B340012219A /* MapKit.framework */; };
 		5F7A73EC204FA1B900824465 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7A73EB204FA1B900824465 /* LocationManager.swift */; };
 		5F7A73EE204FA1EC00824465 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7A73ED204FA1EC00824465 /* MapController.swift */; };
+		5F8D85462052570600DCB05B /* HomeController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8D85452052570600DCB05B /* HomeController.framework */; };
+		5F8D854A20525D9300DCB05B /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8D854920525D9300DCB05B /* HomeKit.framework */; };
 		5FD2BCA3204FC67D004564CC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD2BCA2204FC67D004564CC /* NotificationManager.swift */; };
 		5FD388DA204E6CB3008B294F /* DistancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD388D9204E6CB3008B294F /* DistancePicker.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +46,9 @@
 		5F7838E6204E6B340012219A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5F7A73EB204FA1B900824465 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		5F7A73ED204FA1EC00824465 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		5F8D85452052570600DCB05B /* HomeController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeController.framework; path = Carthage/Build/iOS/HomeController.framework; sourceTree = "<group>"; };
+		5F8D854820525D9300DCB05B /* GettingWarmer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GettingWarmer.entitlements; sourceTree = "<group>"; };
+		5F8D854920525D9300DCB05B /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		5FD2BCA2204FC67D004564CC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		5FD388D9204E6CB3008B294F /* DistancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistancePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,7 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F8D854A20525D9300DCB05B /* HomeKit.framework in Frameworks */,
 				5F7838E7204E6B340012219A /* MapKit.framework in Frameworks */,
+				5F8D85462052570600DCB05B /* HomeController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +96,7 @@
 		5F7838C4204E60AE0012219A /* GettingWarmer */ = {
 			isa = PBXGroup;
 			children = (
+				5F8D854820525D9300DCB05B /* GettingWarmer.entitlements */,
 				5F7A73ED204FA1EC00824465 /* MapController.swift */,
 				5F7A73EB204FA1B900824465 /* LocationManager.swift */,
 				5F7838C5204E60AE0012219A /* AppDelegate.swift */,
@@ -115,6 +123,8 @@
 		5F7838E5204E6B340012219A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F8D854920525D9300DCB05B /* HomeKit.framework */,
+				5F8D85452052570600DCB05B /* HomeController.framework */,
 				5F7838E6204E6B340012219A /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -130,6 +140,7 @@
 				5F7838BE204E60AE0012219A /* Sources */,
 				5F7838BF204E60AE0012219A /* Frameworks */,
 				5F7838C0204E60AE0012219A /* Resources */,
+				5F8D85472052571D00DCB05B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -172,6 +183,9 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.HomeKit = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -222,6 +236,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5F8D85472052571D00DCB05B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/HomeController.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/HomeController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5F7838BE204E60AE0012219A /* Sources */ = {
@@ -386,8 +418,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GettingWarmer/GettingWarmer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F4WTN36U2F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GettingWarmer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thumbworks.GettingWarmer;
@@ -401,8 +438,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GettingWarmer/GettingWarmer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F4WTN36U2F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GettingWarmer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thumbworks.GettingWarmer;

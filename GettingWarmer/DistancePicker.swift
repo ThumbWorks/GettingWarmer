@@ -9,7 +9,7 @@
 import UIKit
 
 class DistancePicker: NSObject {
-    let options = Array(stride(from: 10, to: 101, by: 10))
+    let options = Array(stride(from: 5, to: 101, by: 5))
     var optionChanged: ((Int) -> ())?
 }
 
