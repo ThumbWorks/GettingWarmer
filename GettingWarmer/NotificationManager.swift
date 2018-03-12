@@ -14,6 +14,7 @@ class NotificationManager: NSObject {
     let no = UNNotificationAction(identifier: "No", title: "No", options: .destructive)
     
     func triggerNotification(seconds: TimeInterval, body: String) {
+        
         let category = UNNotificationCategory(identifier: categoryIdentifier,
                                               actions: [yes, no],
                                               intentIdentifiers: [],

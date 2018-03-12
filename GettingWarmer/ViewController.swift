@@ -42,10 +42,14 @@ class ViewController: UIViewController {
         locationManager.delegate = locationManager
         mapView.delegate = mapController
         
-        if let region = locationManager.monitoredRegions.first as? CLCircularRegion {
-            radius = region.radius
-            location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
-            mapController.updateCircle(mapView: mapView, radius: radius, location: region.center)
+        for region in locationManager.monitoredRegions {
+            print("this is one of the regions monitored")
+            if let region = region as? CLCircularRegion {
+                print("it is a circler")
+                mapController.addMonitoredRegion(mapView: mapView, circle: region)
+//                radius = region.radius
+//                location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+            }
         }
         
         locationManager.authBlock = { (success, string) in
@@ -86,6 +90,18 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
+    
+    @IBAction func doublePressedMap(sender: UILongPressGestureRecognizer) {
+        print("double tap")
+
+        let coordinate = mapView.centerCoordinate
+        let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        location = newLocation
+        radius =
+            mapView.region.span.latitudeDelta * 111000 / 2
+        mapController.updateCircle(mapView: mapView, radius: radius, location: newLocation.coordinate)
+    }
+    
     @IBAction func initiateLocationButton(initiateButton: UIButton) {
         locationManager.requestAlwaysAuthorization()
     }
@@ -123,6 +139,13 @@ extension ViewController {
     @IBAction func setGeofence(_ sender: Any) {
         print("Set the Geofence")
         guard let location = location else {return}
+        
+        let circle = CLCircularRegion(center: location.coordinate,
+                                      radius: radius,
+                                      identifier: Date().description)
+        mapController.addMonitoredRegion(mapView: mapView, circle: circle)
+        
+        // Now monitor that region
         let region = CLCircularRegion(center: location.coordinate, radius: radius, identifier: "homeRegionIdentifier")
         locationManager.startMonitoring(for: region)
     }
