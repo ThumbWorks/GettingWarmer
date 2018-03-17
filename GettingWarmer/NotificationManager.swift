@@ -10,13 +10,14 @@ import UserNotifications
 
 class NotificationManager: NSObject {
     let categoryIdentifier = "booleanIdentifier"
-    let yes = UNNotificationAction(identifier: "Yes", title: "Yes", options: .foreground)
-    let no = UNNotificationAction(identifier: "No", title: "No", options: .destructive)
-    
+    let heaterOn = UNNotificationAction(identifier: "Heat", title: "Heat", options: .foreground)
+    let heaterOff = UNNotificationAction(identifier: "Off", title: "Off", options: .foreground)
+    let dismiss = UNNotificationAction(identifier: "Cancel", title: "Cancel", options: .destructive)
+
     func triggerNotification(seconds: TimeInterval, body: String) {
         
         let category = UNNotificationCategory(identifier: categoryIdentifier,
-                                              actions: [yes, no],
+                                              actions: [heaterOn, heaterOff, dismiss],
                                               intentIdentifiers: [],
                                               options: [])
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds,
@@ -47,11 +48,30 @@ class NotificationManager: NSObject {
         }
     }
 }
-
+import HomeController
 extension NotificationManager: UNUserNotificationCenterDelegate {
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("did receive notification \(response.actionIdentifier)")
-        completionHandler()
+        print("NOTIFICATION did receive notification \(response.actionIdentifier)")
+        let identifier = response.actionIdentifier
+        if identifier == heaterOn.identifier || identifier == heaterOff.identifier || identifier == UNNotificationDefaultActionIdentifier {
+            print("NOTIFICATION turn on the heat")
+            let homeController = HomeController()
+            homeController.finishedInitializing = {
+                for therm in homeController.home.thermostats where therm.canSetThermostatMode()  {
+                    print("NOTIFICATION thermostat name is \(therm.name())")
+                    
+
+                    if identifier == self.heaterOn.identifier {
+                        therm.setMode(to: .heat)
+                    }
+                    if identifier == self.heaterOff.identifier {
+                        therm.setMode(to: .off)
+                    }
+                    completionHandler()
+                }
+            }
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
